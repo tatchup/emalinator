@@ -1,0 +1,16 @@
+email,name,expected_error,error
+bad_syntax_email, Jonh, Bad syntax,Bad syntax
+example@maildrop.cc, Pablo the guy, Disposable,Disposable
+example@mailinator.com, Paul, Disposable,Disposable
+example@nwytg.net, Joshua, Disposable,Disposable
+example@armyspy.com, Brandon, Disposable,Disposable
+example@cuvox.de, Alfate How, Disposable,Disposable
+example@dayrep.com, Dayrep Email, Disposable,Disposable
+example@einrot.com, Einrot Email, Disposable,Disposable
+example@fleckens.hu, Eleckens Email, Disposable,Disposable
+example@gustr.com, Eustr Email, Disposable,Disposable
+example@banit.club, Eanit Email, Disposable,Disposable
+example@rhyta.com, Ehyta Email, Disposable,Disposable
+example@superrito.com, Euperrito Email, Disposable,Disposable
+example@pokemail.net, Eokemail Email, Disposable,Disposable
+example@spam4.me, Epam4 Email, Disposable,Disposable

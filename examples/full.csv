@@ -1,0 +1,20 @@
+email,name,expected_error
+brandon@tatchup.com, Brandon, None
+phec06@gmail.com, Pedro, None
+bad_syntax_email, Jonh, Bad syntax
+example@maildrop.cc, Pablo the guy, Disposable
+example@mailinator.com, Paul, Disposable
+example@nwytg.net, Joshua, Disposable
+example@armyspy.com, Brandon, Disposable
+example@cuvox.de, Alfate How, Disposable
+example@dayrep.com, Dayrep Email, Disposable
+example@einrot.com, Einrot Email, Disposable
+example@fleckens.hu, Eleckens Email, Disposable
+example@gustr.com, Eustr Email, Disposable
+example@banit.club, Eanit Email, Disposable
+example@rhyta.com, Ehyta Email, Disposable
+example@superrito.com, Euperrito Email, Disposable
+example@pokemail.net, Eokemail Email, Disposable
+example@spam4.me, Epam4 Email, Disposable
+example@host.com, Eost Email, No MX host found
+example@another.host.com, Enother Email, No MX host found

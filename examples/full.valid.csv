@@ -1,0 +1,5 @@
+email,name,expected_error
+brandon@tatchup.com, Brandon, None
+phec06@gmail.com, Pedro, None
+example@host.com, Eost Email, No MX host found
+example@another.host.com, Enother Email, No MX host found
