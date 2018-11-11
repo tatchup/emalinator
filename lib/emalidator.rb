@@ -1,5 +1,5 @@
 require 'emalidator/version'
-require 'emalidator/emalidator'
+require 'emalidator/main'
 require 'emalidator/email'
 require 'emalidator'
 
@@ -19,7 +19,7 @@ module Emalidator
   class CLI < Thor
     desc 'validate path/to/file|email', 'Validates emails from a file or inline email'
     def validate(main_arg)
-      Emalidator::Emalidator::Emalidator.new main_arg: main_arg
+      Emalidator::Main.new main_arg: main_arg
     end
   end
 end

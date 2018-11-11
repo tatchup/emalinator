@@ -1,5 +1,5 @@
 module Emalidator
-  class Emalidator
+  class Main
     def initialize(main_arg: nil)
       Email.load_disposable_domains
 
