@@ -64,6 +64,8 @@ module Emalidator
         return
       end
 
+
+
       unless server_says_its_ok?
         self.emalidator_errors.push 'Server said nope'
         self.emalidator_valid = false
@@ -100,18 +102,18 @@ module Emalidator
     end
 
     def check_in_server(mx_server)
-      # Net::SMTP.enable_tls(OpenSSL::SSL::VERIFY_NONE)
       Net::SMTP.start(mx_server[:address], 25) do |smtp|
         response = smtp.helo 'hi'
-        return false unless response.status == '250'
+        return false unless response.success?
+        response = smtp.starttls
+        return false unless response.success?
         response = smtp.mailfrom Email.send_as
-        return false unless response.status == '250'
+        return false unless response.success?
         response = smtp.rcptto email
-        return true if response.status == '250'
+        return response.success?
       end
-      # Net::SMTP.enable_tls(OpenSSL::SSL::VERIFY_NONE)
-      # Net::SMTP.start mx_server[:address], 25, domain
     rescue => e
+      puts e.message
       return false
     end
 
