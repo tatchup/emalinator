@@ -64,8 +64,6 @@ module Emalidator
         return
       end
 
-
-
       unless server_says_its_ok?
         self.emalidator_errors.push 'Server said nope'
         self.emalidator_valid = false
@@ -93,12 +91,13 @@ module Emalidator
         begin
           result = check_in_server mx_server
           return true if result
-        rescue
+        rescue => e
+          byebug
         end
       end
-
-    rescue
-      false
+    rescue => e
+      byebug
+      return false
     end
 
     def check_in_server(mx_server)
@@ -110,6 +109,7 @@ module Emalidator
         response = smtp.mailfrom Email.send_as
         return false unless response.success?
         response = smtp.rcptto email
+        byebug
         return response.success?
       end
     rescue => e
