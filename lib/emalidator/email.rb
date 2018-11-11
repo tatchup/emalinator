@@ -1,11 +1,12 @@
 module Emalidator
   class Email
     @columns = []
-    @email_to_send_as = 'tbarter.mailer@gmail.com'
+    @send_as = 'tbarter.mailer@gmail.com'
 
     class << self
       attr_accessor :columns
       attr_accessor :disposable_domains
+      attr_accessor :send_as
     end
 
     attr_accessor :emalidator_mxers
@@ -38,6 +39,10 @@ module Emalidator
 
     def domain
       self.email.split('@').last
+    end
+
+    def validity
+      emalidator_valid ? 'valid' : "invalid (#{emalidator_errors.first})"
     end
 
     def validate
@@ -82,23 +87,32 @@ module Emalidator
     end
 
     def server_says_its_ok?
-      return true # AHHHHHHHHHHHHHHHHHHHH
-
       emalidator_mxers.each do |mx_server|
-        smtp = connect_to_smtp_server mx_server
-        next unless smtp
-        smtp_return = try_to_send_message
-        return true if smtp_return.status.to_i == 250
+        begin
+          result = check_in_server mx_server
+          return true if result
+        rescue
+        end
       end
 
+    rescue
       false
     end
 
-    def connect_to_smtp_server(mx_server)
-      Net::SMTP.start mx_server[:address], 25, domain
+    def check_in_server(mx_server)
+      # Net::SMTP.enable_tls(OpenSSL::SSL::VERIFY_NONE)
+      Net::SMTP.start(mx_server[:address], 25) do |smtp|
+        response = smtp.helo 'hi'
+        return false unless response.status == '250'
+        response = smtp.mailfrom Email.send_as
+        return false unless response.status == '250'
+        response = smtp.rcptto email
+        return true if response.status == '250'
+      end
+      # Net::SMTP.enable_tls(OpenSSL::SSL::VERIFY_NONE)
+      # Net::SMTP.start mx_server[:address], 25, domain
     rescue => e
-      # e.message always tell "execution expired"
-      nil
+      return false
     end
 
     def disposable?

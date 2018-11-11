@@ -12,14 +12,25 @@ module Emalidator
       end
 
       validate
+      puts statistics
 
-      File.open(@valid_output_file, 'w') do |f|
-        f.write valid_emails_as_csv
-      end
+      if @valid_output_file && @invalid_output_file
+        File.open(@valid_output_file, 'w') do |f|
+          f.write valid_emails_as_csv
+        end
 
-      File.open(@invalid_output_file, 'w') do |f|
-        f.write invalid_emails_as_csv
+        File.open(@invalid_output_file, 'w') do |f|
+          f.write invalid_emails_as_csv
+        end
+      else
+        @emails.each do |email|
+          puts "#{email.email} is #{email.validity}"
+        end
       end
+    end
+
+    def statistics
+      { 'Valid ratio': valid_emails.count.to_f/(@emails.count) }
     end
 
     def output_file_names(file_name)
@@ -77,7 +88,6 @@ module Emalidator
       # <Benchmark::Tms:0x007f8fdc2637c0 @label="", @real=146.32397600007243, @cstime=0.0, @cutime=0.0, @stime=69.38000000000001, @utime=14.42, @total=83.80000000000001>
       # 512 Threads
       # <Benchmark::Tms:0x007fb5a4158b58 @label="", @real=161.33898700005375, @cstime=0.0, @cutime=0.0, @stime=86.00999999999999, @utime=17.290000000000003, @total=103.3>
-
     end
 
     def valid_emails_as_csv

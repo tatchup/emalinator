@@ -8,10 +8,11 @@ require 'benchmark'
 require 'byebug'
 require 'csv'
 require 'json'
-require 'resolv-replace'
-require 'net/smtp'
+require 'net/smtp/proxy'
+# require 'net/smtp'
 require 'parallel'
 require 'resolv'
+# require 'resolv-replace'
 require 'thor'
 
 module Emalidator

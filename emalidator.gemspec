@@ -40,4 +40,5 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'thor', '~> 0.20'
   spec.add_dependency 'csv', '~> 3.0'
   spec.add_dependency 'parallel', '~> 1.12'
+  spec.add_dependency 'net-smtp-proxy', '~> 2.0'
 end
